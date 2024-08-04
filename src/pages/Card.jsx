@@ -4,37 +4,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFilm } from "../slices/sliceFilms";
 import Table from "react-bootstrap/Table";
-import { Button } from "react-bootstrap";
 
 export default function Card() {
   const params = useParams();
-  const [valtext, setVal] = useState("");
-  const [answer, setAnswer] = useState("");
   const list = useSelector((state) => state.value);
   const dispatch = useDispatch();
-  const [list2, setList2] = useState({});
   useEffect(() => {
     const fetchOneUser = async () => {
       try {
         const data = await dispatch(fetchFilm(params.id)).unwrap();
-        console.log("success", setList2(data));
+        console.log("success", data);
       } catch (err) {
         console.log("error", `Fetch failed: ${err.message}`);
       }
     };
 
     fetchOneUser();
-  }, [answer]);
-
-  let temp;
-  console.log(params.id);
+  }, []);
 
   return (
     <div>
       <div>Card</div>
       <div>
         <Table bordered striped hover variant="dark" size="sm">
-          {[list2].map((subject, i) => (
+          {[list.value].map((subject, i) => (
             <tbody key={i}>
               <tr>
                 <td>{i + 1}</td>

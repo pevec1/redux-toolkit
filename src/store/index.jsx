@@ -4,5 +4,6 @@ import valueReducer from "../slices/sliceFilms";
 export default configureStore({
   reducer: {
     value: valueReducer,
+    favorite: valueReducer,
   },
 });
