@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFilms, addFavorites } from "../slices/sliceFilms";
+import { fetchFilms } from "../slices/sliceFilms";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
@@ -37,7 +37,6 @@ useEffect(() => {
 
   const addFavorite = (id, imdb) => {
     localStorage.setItem(id, imdb);
-    dispatch(addFavorites(imdb));
   };
 
   if (list.value.Response === "False") {
