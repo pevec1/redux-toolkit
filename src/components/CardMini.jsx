@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,7 +7,7 @@ import { fetchFilm } from "../slices/sliceFilms";
 import Table from "react-bootstrap/Table";
 import { Button } from "react-bootstrap";
 
-export default function Card() {
+export default function Card({imdb}) {
   const params = useParams();
   const [valtext, setVal] = useState("");
   const [answer, setAnswer] = useState("");
@@ -16,7 +17,7 @@ export default function Card() {
   useEffect(() => {
     const fetchOneUser = async () => {
       try {
-        const data = await dispatch(fetchFilm(params.id)).unwrap();
+        const data = await dispatch(fetchFilm(imdb)).unwrap();
         console.log("success", setList2(data));
       } catch (err) {
         console.log("error", `Fetch failed: ${err.message}`);
@@ -27,7 +28,7 @@ export default function Card() {
   }, [answer]);
 
   let temp;
-  console.log(params.id);
+  console.log(list2);
 
   return (
     <div>
@@ -49,22 +50,6 @@ export default function Card() {
                 <td>{subject.Actors}</td>
               </tr>
               <tr>
-                <td>Awards</td>
-                <td>{subject.Awards}</td>
-              </tr>
-              <tr>
-                <td>BoxOffice</td>
-                <td>{subject.BoxOffice}</td>
-              </tr>
-              <tr>
-                <td>Country</td>
-                <td>{subject.Country}</td>
-              </tr>
-              <tr>
-                <td>DVD</td>
-                <td>{subject.DVD}</td>
-              </tr>
-              <tr>
                 <td>Director</td>
                 <td>{subject.Director}</td>
               </tr>
@@ -73,34 +58,10 @@ export default function Card() {
                 <td>{subject.Genre}</td>
               </tr>
               <tr>
-                <td>Language</td>
-                <td>{subject.Language}</td>
-              </tr>
-              <tr>
-                <td>Plot</td>
-                <td>{subject.Plot}</td>
-              </tr>
-              <tr>
                 <td>Poster</td>
                 <td>
                   <img src={subject.Poster} />
                 </td>
-              </tr>
-              <tr>
-                <td>Production</td>
-                <td>{subject.Production}</td>
-              </tr>
-              <tr>
-                <td>Rated</td>
-                <td>{subject.Rated}</td>
-              </tr>
-              <tr>
-                <td>Released</td>
-                <td>{subject.Released}</td>
-              </tr>
-              <tr>
-                <td>Response</td>
-                <td>{subject.Response}</td>
               </tr>
               <tr>
                 <td>Runtime</td>
@@ -111,28 +72,12 @@ export default function Card() {
                 <td>{subject.Title}</td>
               </tr>
               <tr>
-                <td>Type</td>
-                <td>{subject.Type}</td>
-              </tr>
-              <tr>
-                <td>Website</td>
-                <td>{subject.Website}</td>
-              </tr>
-              <tr>
-                <td>Writer</td>
-                <td>{subject.Writer}</td>
-              </tr>
-              <tr>
                 <td>Year</td>
                 <td>{subject.Year}</td>
               </tr>
               <tr>
                 <td>imdbRating</td>
                 <td>{subject.imdbRating}</td>
-              </tr>
-              <tr>
-                <td>imdbVotes</td>
-                <td>{subject.imdbVotes}</td>
               </tr>
             </tbody>
           ))}
